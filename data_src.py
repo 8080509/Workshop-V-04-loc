@@ -17,7 +17,8 @@ fam_index = pd.DataFrame(data = np.arange(33), index = families)[0]
 
 # Here's the conversion
 train_txf = train.copy()
-train_txf['date'] = (pd.to_datetime(train['date']) - dates_dt_min).dt.days
+train_txf['date'] = pd.to_datetime(train['date'])
+train_txf['day'] = (pd.to_datetime(train['date']) - dates_dt_min).dt.days
 train_txf['store_nbr'] = train['store_nbr'] - 1
 train_txf['family'] = train['family'].apply(fam_index.get)
 
@@ -27,7 +28,7 @@ sales = np.zeros(dtype = np.float64, shape = sales_shape)
 
 # Fill in the sales array
 for row in train_txf.itertuples():
-    day = row.date
+    day = row.day
     store = row.store_nbr
     fam = row.family
     sales[day, store, fam] = row.sales
