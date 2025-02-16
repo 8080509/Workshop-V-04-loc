@@ -73,7 +73,7 @@ oil_filled = pd.DataFrame(index = raw_date_range, data = {
     'day' : pd.to_timedelta(raw_date_range, unit = 'days')
 })
 oil_filled['date'] = oil_filled['day'] + dates_dt_min
-oil_filled['price'] = oil_filled['day_num'].apply(oil_txf['dcoilwtico'].get).ffill()
+oil_filled['price'] = oil_filled['day_num'].apply(oil_txf['dcoilwtico'].get).ffill().bfill()
 
 oil_shape = (num_dates,)
 oil = oil_filled['price'].values
