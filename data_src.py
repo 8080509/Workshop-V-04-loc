@@ -7,6 +7,9 @@ import datetime as dt
 train_raw = pd.read_csv('data/train.csv')
 train = train_raw # Todo:  Add split here
 
+test_raw = pd.read_csv('data/test.csv')
+test = test_raw
+
 # date_time conversion
 dates_dt = pd.to_datetime(train['date'])
 dates_dt_min = dates_dt.min()
@@ -32,3 +35,5 @@ for row in train_txf.itertuples():
     store = row.store_nbr
     fam = row.family
     sales[day, store, fam] = row.sales
+
+
